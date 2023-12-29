@@ -12,7 +12,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       domain={enviroment.auth_domain}
       clientId={enviroment.auth_clientid}
       authorizationParams={{
-        redirect_uri: window.location.origin
+        redirect_uri: `${window.location.origin}/passwords`
       }}
     >
       <UserAuthProvider>

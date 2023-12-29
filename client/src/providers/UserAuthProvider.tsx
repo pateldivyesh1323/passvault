@@ -28,7 +28,7 @@ export const UserAuthProvider: FC<PropsType> = ({ children }) => {
 
     const [user, setUser] = useState<UserInterface | undefined>();
     const [error, setError] = useState<string | undefined>();
-
+    console.log(auth0User);
     useEffect(() => {
         if (auth0Error?.message) {
             setError(auth0Error.message);
