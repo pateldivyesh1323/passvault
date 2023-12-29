@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import enviroments from "../../utils/enviroments";
+import enviroments from "../utils/enviroments";
 
 const mongouri = enviroments.mongo_uri;
 

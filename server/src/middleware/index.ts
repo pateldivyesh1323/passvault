@@ -1,4 +1,4 @@
-import enviroments from "../../utils/enviroments";
+import enviroments from "../utils/enviroments";
 import { auth } from "express-oauth2-jwt-bearer";
 
 const jwtCheck = auth({
@@ -8,7 +8,6 @@ const jwtCheck = auth({
 });
 
 const authorize = (err, req, res, next) => {
-    console.log(err);
     if (err) {
         res.status(401).send("Unauthorized");
     } else {

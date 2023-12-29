@@ -1,5 +1,5 @@
 import express from 'express';
-import enviroments from '../utils/enviroments';
+import enviroments from './utils/enviroments';
 import connectDB from './database/db';
 import { authorize, jwtCheck } from './middleware';
 import passwordRoute from './routes/password'
