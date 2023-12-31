@@ -1,6 +1,6 @@
 import express from 'express'
 import { getLoggedinUID } from '../utils/helper';
-import { createNewPassword, getAllPasswords } from '../controllers/password';
+import { createNewPassword, getAllPasswords, getOnePassword, updatePassword, deletePassword } from '../controllers/password';
 
 const router = express.Router()
 
@@ -14,6 +14,17 @@ router.get('/', async (req, res) => {
     }
 })
 
+router.get('/:id', async (req, res) => {
+    const uid = getLoggedinUID(req.auth);
+    const { id } = req.params;
+    try {
+        const { status, data } = await getOnePassword(uid, id);
+        res.status(status).json(data);
+    } catch (error) {
+
+    }
+})
+
 router.post('/', async (req, res) => {
     const uid = getLoggedinUID(req.auth);
     const { name, password } = req.body;
@@ -22,6 +33,29 @@ router.post('/', async (req, res) => {
     }
     try {
         const { status, data } = await createNewPassword(uid, name, password);
+        res.status(status).json(data);
+    } catch (error) {
+        res.status(500).json();
+    }
+})
+
+router.put('/:id', async (req, res) => {
+    try {
+        const uid = getLoggedinUID(req.auth);
+        const { id } = req.params;
+        const { name, password } = req.body;
+        const { status, data } = await updatePassword(uid, id, name, password);
+        res.status(status).json(data);
+    } catch (error) {
+        res.status(500).json();
+    }
+})
+
+router.delete('/:id', async (req, res) => {
+    try {
+        const uid = getLoggedinUID(req.auth);
+        const { id } = req.params;
+        const { status, data } = await deletePassword(uid, id);
         res.status(status).json(data);
     } catch (error) {
         res.status(500).json();
