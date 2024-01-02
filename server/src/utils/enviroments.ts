@@ -8,4 +8,5 @@ export default {
     auth_domain: process.env.AUTH_DOMAIN,
     api_identifier: process.env.API_IDENTIFIER,
     encryption_key: process.env.ENCRYPTION_KEY,
+    origin_uri: process.env.ORIGIN_URI,
 }

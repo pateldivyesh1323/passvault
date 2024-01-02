@@ -3,6 +3,7 @@ import enviroments from './utils/enviroments';
 import connectDB from './database/db';
 import { authorize, jwtCheck } from './middleware';
 import passwordRoute from './routes/password'
+import cors from 'cors';
 
 const app = express();
 
@@ -12,6 +13,8 @@ connectDB();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors({ credentials: true, origin: enviroments.origin_uri }));
+
 app.use(jwtCheck);
 app.use(authorize);
 
