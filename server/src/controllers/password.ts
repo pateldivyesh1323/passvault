@@ -8,8 +8,12 @@ const isUserOwner = async (uid: string, id: string) => {
 
 const getAllPasswords = async (uid: string) => {
     try {
-        const password = await Password.find({ uid });
-        return { status: 200, data: password }
+        let passwords = await Password.find({ uid });
+        passwords = passwords.map((pass) => {
+            pass.password = decryptData(pass.password);
+            return pass;
+        })
+        return { status: 200, data: passwords }
     } catch (error) {
         return { status: 500, data: null }
     }
