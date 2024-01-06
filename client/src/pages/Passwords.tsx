@@ -5,9 +5,8 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import { getErrorMsg } from '../utils/error';
 import enviroment from '../enviroment';
-import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { Box, Modal, Typography } from '@mui/material';
+import { Modal } from '@mui/material';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import { decryptText, encryptText } from '../utils/passwordHandler';
 
@@ -17,7 +16,6 @@ const Passwords = (): React.ReactNode => {
 
     const [passwords, setPasswords] = useState<PassInterface[] | null>();
     const [createOpen, setCreateOpen] = useState<boolean>(false);
-    const [editOpen, setEditOpen] = useState<boolean>(false);
     const [deleteOpen, setDeleteOpen] = useState<boolean>(false);
     const [viewOpen, setViewOpen] = useState<boolean>(false);
     const [modalPass, setModalPass] = useState<PassInterface | null>();
@@ -72,14 +70,10 @@ const Passwords = (): React.ReactNode => {
 
     const handleDecryption = (e: React.FormEvent) => {
         e.preventDefault();
-        try {
-            const decrypted = decryptText(modalPass?.password as string, decryptionKey);
-            if (decrypted === "") {
-                toast.error("Incorrect decryption key!");
-            }
-            setDecryptedPass(decrypted);
-        } catch (error) {
-            toast.error(getErrorMsg(error));
+        const decrypted: string = decryptText(modalPass?.password as string, decryptionKey);
+        setDecryptedPass(decrypted);
+        if (decrypted === "") {
+            toast.error("Incorrect decryption key!");
         }
     }
 
@@ -138,10 +132,6 @@ const Passwords = (): React.ReactNode => {
                                             setViewOpen(true)
                                         }}>
                                         <RemoveRedEyeIcon />
-                                    </button>
-                                    <button className='mr-4'
-                                        onClick={() => { setModalPass(password); setEditOpen(true) }}>
-                                        <EditIcon />
                                     </button>
                                     <button
                                         onClick={() => { setModalPass(password); setDeleteOpen(true) }}>
@@ -209,22 +199,6 @@ const Passwords = (): React.ReactNode => {
                         }
                     </form>
                 </div>
-            </Modal>
-            {/* Edit password modal */}
-            <Modal
-                open={editOpen}
-                onClose={() => { setModalPass(null); setEditOpen(false) }}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-            >
-                <Box>
-                    <Typography id="modal-modal-title" variant="h6" component="h2">
-                        Edit
-                    </Typography>
-                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-                    </Typography>
-                </Box>
             </Modal>
             {/* Delete password modal */}
             <Modal
