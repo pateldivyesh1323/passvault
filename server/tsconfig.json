@@ -5,7 +5,15 @@
     "target": "es6",
     "moduleResolution": "node",
     "sourceMap": true,
-    "outDir": "dist"
+    "outDir": "dist",
+    "baseUrl": "./src",
+    "paths": {
+      "*": [
+        "*"
+      ]
+    }
   },
-  "lib": ["es2015"]
+  "lib": [
+    "es2015"
+  ]
 }
