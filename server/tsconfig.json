@@ -1,9 +1,8 @@
 {
   "compilerOptions": {
-    "module": "es2015",
+    "module": "CommonJS",
     "esModuleInterop": true,
     "target": "es6",
-    "moduleResolution": "bundler",
     "sourceMap": true,
     "outDir": "dist",
     "baseUrl": "./src",
