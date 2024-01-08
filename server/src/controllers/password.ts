@@ -1,4 +1,4 @@
-import Password from "../models/Password";
+import Password from "../models/password";
 import { decryptData, encryptData } from "../utils/encryption";
 
 const isUserOwner = async (uid: string, id: string) => {
