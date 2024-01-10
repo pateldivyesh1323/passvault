@@ -12,30 +12,48 @@ Feel free to contribute to the project.
 
 - Clone the repository
 
-  `git clone https://github.com/pateldivyesh1323/passvault`
+  ```bash
+  git clone https://github.com/pateldivyesh1323/passvault
+  ```
 
 - Open passvault in terminal
 
-  `cd passvault`
+  ```bash
+   cd passvault
+   ```
 
 - Open Client
 
-  `cd client`
+  ```bash
+   cd client
+  ```
 
 - Install dependencies of client
 
-  `npm install`
+  ```bash
+   npm install
+  ```
 
 - Create .env and copy contents of .env.sample. Make sure to fill all enviroment variables.
 
-  `cp .env.sample .env`
+  ```bash
+   cp .env.sample .env
+  ```
 
 - Run Client
 
-  `npm run dev`
+  ```bash
+   npm run dev
+  ```
 
 - ***Follow same steps for server which were followed for client***
 
-Client will start running on `http://localhost:5173`
+Client will start running on 
+  ```bash
+    http://localhost:5173 
+  ```
 
-Server will start running on `http://localhost:8000`
+Server will start running on
+  ```bash
+    http://localhost:8000
+  ```
