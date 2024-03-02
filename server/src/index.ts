@@ -13,7 +13,7 @@ connectDB();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors({ credentials: true, origin: enviroments.origin_uri }));
+app.use(cors({ origin: '*' }));
 
 app.use(jwtCheck);
 app.use(authorize);
