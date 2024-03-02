@@ -93,6 +93,12 @@ const Passwords = (): React.ReactNode => {
             toast.error(getErrorMsg(error));
         }
     }
+
+    const copyToClipboard = () => {
+        navigator.clipboard.writeText(decryptedPass);
+        toast.success("Copied to clipboard");
+    }
+
     useEffect(() => {
         const fetchPasswords = async () => {
             try {
@@ -154,8 +160,8 @@ const Passwords = (): React.ReactNode => {
                 aria-describedby="modal-modal-description"
                 className="flex items-center justify-center"
             >
-                <div className='bg-[#5C8374] rounded p-5 text-lg'>
-                    <div className='text-center mb-6 w-[500px]'>Create new password</div>
+                <div className='bg-[#5C8374] rounded p-5 mx-2 md:mx-0 text-lg w-[600px]'>
+                    <div className='text-center mb-6 max-w-[500px]'>Create new password</div>
                     <form onSubmit={handleCreatePassword}>
                         <div className='mb-4'>
                             <label htmlFor="name">Name: </label>
@@ -163,11 +169,11 @@ const Passwords = (): React.ReactNode => {
                         </div>
                         <div className='mb-4'>
                             <label htmlFor="password">Password: </label>
-                            <input type="text" id='password' className='rounded w-full bg-black px-2 py-1' value={createPass.password} onChange={(e) => { setCreatePass({ ...createPass, password: e.target.value }) }} />
+                            <input type="password" id='password' className='rounded w-full bg-black px-2 py-1' value={createPass.password} onChange={(e) => { setCreatePass({ ...createPass, password: e.target.value }) }} />
                         </div>
                         <div className='mb-4'>
                             <label htmlFor="encrkey">Encryption key: </label>
-                            <input type="text" id='encrkey' className='rounded w-full bg-black px-2 py-1' value={createPass.encryptionKey} onChange={(e) => { setCreatePass({ ...createPass, encryptionKey: e.target.value }) }} />
+                            <input type="password" id='encrkey' className='rounded w-full bg-black px-2 py-1' value={createPass.encryptionKey} onChange={(e) => { setCreatePass({ ...createPass, encryptionKey: e.target.value }) }} />
                         </div>
                         <div className='float-right'>
                             <button type='submit' className="p-1 rounded bg-[#183D3D] mr-4" >Create</button>
@@ -187,17 +193,18 @@ const Passwords = (): React.ReactNode => {
                 aria-describedby="modal-modal-description"
                 className="flex items-center justify-center"
             >
-                <div className='bg-[#5C8374] rounded p-5 text-lg w-[600px]'>
-                    <div>Name : {modalPass?.name}</div>
-                    <div className='break-all'>Encrypted password : {modalPass?.password}</div>
-                    <form onSubmit={handleDecryption}>
-                        <label htmlFor="decrkey">Decryption Key: </label>
-                        <input type="text" id="decrkey" className='rounded w-[50%] px-2 py-1 bg-black mr-2' placeholder='Enter key here' value={decryptionKey} onChange={(e) => { setDecryptionKey(e.target.value) }} />
-                        <button className="p-1 rounded bg-[#183D3D]" type='submit'>Decrypt</button>
-                        {decryptedPass &&
-                            <div>Decrypted password: {decryptedPass}</div>
-                        }
-                    </form>
+                <div className='bg-[#5C8374] rounded p-5 mx-2 md:mx-0 text-lg w-[600px]'>
+                    <div>Name : <div className='bg-[#183D3D] p-2 mb-4 rounded'>{modalPass?.name}</div></div>
+                    <div className='break-all'>Encrypted password : <div className='bg-[#183D3D] p-2 mb-4 rounded'>{modalPass?.password}</div></div>
+                    {!decryptedPass ?
+                        <form onSubmit={handleDecryption} className='mb-4'>
+                            <label htmlFor="decrkey">Decryption Key: </label>
+                            <div><input type="text" id="decrkey" className='rounded mb-2 w-full md:w-[85%] px-2 py-1 bg-black mr-2' placeholder='Enter key here' value={decryptionKey} onChange={(e) => { setDecryptionKey(e.target.value) }} />
+                                <button className="p-1 rounded bg-[#183D3D]" type='submit'>Decrypt</button>
+                            </div>
+                        </form> :
+                        <div><div className='mb-2'>Password <button className='bg-[#183D3D] text-sm p-1 rounded float-right' onClick={copyToClipboard}>copy</button></div> <div className='p-2 bg-[#183D3D] rounded'>{decryptedPass}</div></div>
+                    }
                 </div>
             </Modal>
             {/* Delete password modal */}
