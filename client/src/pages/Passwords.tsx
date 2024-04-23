@@ -25,9 +25,11 @@ const Passwords = (): React.ReactNode => {
         password: "",
         encryptionKey: "",
     });
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
     const fetchPasswords = useCallback(async () => {
         try {
+            setIsLoading(true);
             const token = await getAccessToken();
             const res = await axios.get(
                 `${enviroment.server_url}/api/password`,
@@ -40,6 +42,8 @@ const Passwords = (): React.ReactNode => {
             setPasswords(res.data);
         } catch (error) {
             toast.error(getErrorMsg(error));
+        } finally {
+            setIsLoading(false);
         }
     }, [getAccessToken]);
 
@@ -129,43 +133,49 @@ const Passwords = (): React.ReactNode => {
                 </button>
             </div>
             <hr />
-            <div className="my-4">
-                {passwords?.length ? (
-                    passwords.map((password) => {
-                        return (
-                            <div
-                                key={password._id}
-                                className="p-4 my-2 bg-[#193c4f8f] cursor-pointer hover:shadow-[2px_2px_30px_2px_#93B1A6] rounded transition-all duration-200 flex items-center justify-between"
-                            >
-                                <div className="whitespace-nowrap overflow-hidden text-ellipsis max-w-[60%]">
-                                    {password.name}
+            {isLoading ? (
+                <div className="text-white font-semibold text-center my-4">
+                    Loading....
+                </div>
+            ) : (
+                <div className="my-4">
+                    {passwords?.length ? (
+                        passwords.map((password) => {
+                            return (
+                                <div
+                                    key={password._id}
+                                    className="p-4 my-2 bg-[#193c4f8f] cursor-pointer hover:shadow-[2px_2px_30px_2px_#93B1A6] rounded transition-all duration-200 flex items-center justify-between"
+                                >
+                                    <div className="whitespace-nowrap overflow-hidden text-ellipsis max-w-[60%]">
+                                        {password.name}
+                                    </div>
+                                    <div>
+                                        <button
+                                            className="mr-4"
+                                            onClick={() => {
+                                                setModalPass(password);
+                                                setViewOpen(true);
+                                            }}
+                                        >
+                                            <RemoveRedEyeIcon />
+                                        </button>
+                                        <button
+                                            onClick={() => {
+                                                setModalPass(password);
+                                                setDeleteOpen(true);
+                                            }}
+                                        >
+                                            <DeleteIcon />
+                                        </button>
+                                    </div>
                                 </div>
-                                <div>
-                                    <button
-                                        className="mr-4"
-                                        onClick={() => {
-                                            setModalPass(password);
-                                            setViewOpen(true);
-                                        }}
-                                    >
-                                        <RemoveRedEyeIcon />
-                                    </button>
-                                    <button
-                                        onClick={() => {
-                                            setModalPass(password);
-                                            setDeleteOpen(true);
-                                        }}
-                                    >
-                                        <DeleteIcon />
-                                    </button>
-                                </div>
-                            </div>
-                        );
-                    })
-                ) : (
-                    <div>No passwords found!</div>
-                )}
-            </div>
+                            );
+                        })
+                    ) : (
+                        <div>No passwords found!</div>
+                    )}
+                </div>
+            )}
             {/* Create password modal */}
             <Modal
                 open={createOpen}
