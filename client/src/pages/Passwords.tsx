@@ -124,7 +124,7 @@ const Passwords = (): React.ReactNode => {
             <div className="my-3 flex items-center justify-between">
                 <div>Your Passwords</div>
                 <button
-                    className="bg-[#93B1A6] text-black p-2 rounded transition-all duration-300 font-medium text-base hover:bg-[#93b1a6bb]"
+                    className="bg-[#93B1A6] text-black p-2 rounded-sm transition-all duration-300 font-medium text-base hover:bg-[#93b1a6bb]"
                     onClick={() => {
                         setCreateOpen(true);
                     }}
@@ -144,7 +144,7 @@ const Passwords = (): React.ReactNode => {
                             return (
                                 <div
                                     key={password._id}
-                                    className="p-4 my-2 bg-[#193c4f8f] cursor-pointer hover:shadow-[2px_2px_30px_2px_#93B1A6] rounded transition-all duration-200 flex items-center justify-between"
+                                    className="p-4 my-2 bg-[#193c4f8f] cursor-pointer hover:shadow-[2px_2px_30px_2px_#93B1A6] rounded-sm transition-all duration-200 flex items-center justify-between"
                                 >
                                     <div className="whitespace-nowrap overflow-hidden text-ellipsis max-w-[60%]">
                                         {password.name}
@@ -187,7 +187,7 @@ const Passwords = (): React.ReactNode => {
                 aria-describedby="modal-modal-description"
                 className="flex items-center justify-center"
             >
-                <div className="bg-[#5C8374] rounded p-5 mx-2 md:mx-0 text-lg w-[600px]">
+                <div className="bg-[#5C8374] rounded-sm p-5 mx-2 md:mx-0 text-lg w-[600px]">
                     <div className="text-center mb-6 max-w-[500px]">
                         Create new password
                     </div>
@@ -240,12 +240,12 @@ const Passwords = (): React.ReactNode => {
                         <div className="float-right">
                             <button
                                 type="submit"
-                                className="p-1 rounded bg-[#183D3D] mr-4"
+                                className="p-1 rounded-sm bg-[#183D3D] mr-4"
                             >
                                 Create
                             </button>
                             <button
-                                className="p-1 rounded bg-[#183D3D]"
+                                className="p-1 rounded-sm bg-[#183D3D]"
                                 onClick={() => {
                                     setCreateOpen(false);
                                 }}
@@ -269,16 +269,16 @@ const Passwords = (): React.ReactNode => {
                 aria-describedby="modal-modal-description"
                 className="flex items-center justify-center"
             >
-                <div className="bg-[#5C8374] rounded p-5 mx-2 md:mx-0 text-lg w-[600px]">
+                <div className="bg-[#5C8374] rounded-sm p-5 mx-2 md:mx-0 text-lg w-[600px]">
                     <div>
                         Name :{" "}
-                        <div className="bg-[#183D3D] p-2 mb-4 rounded">
+                        <div className="bg-[#183D3D] p-2 mb-4 rounded-sm">
                             {modalPass?.name}
                         </div>
                     </div>
                     <div className="break-all">
                         Encrypted password :{" "}
-                        <div className="bg-[#183D3D] p-2 mb-4 rounded">
+                        <div className="bg-[#183D3D] p-2 mb-4 rounded-sm">
                             {modalPass?.password}
                         </div>
                     </div>
@@ -297,7 +297,7 @@ const Passwords = (): React.ReactNode => {
                                     }}
                                 />
                                 <button
-                                    className="p-1 rounded bg-[#183D3D]"
+                                    className="p-1 rounded-sm bg-[#183D3D]"
                                     type="submit"
                                 >
                                     Decrypt
@@ -309,13 +309,13 @@ const Passwords = (): React.ReactNode => {
                             <div className="mb-2">
                                 Password{" "}
                                 <button
-                                    className="bg-[#183D3D] text-sm p-1 rounded float-right"
+                                    className="bg-[#183D3D] text-sm p-1 rounded-sm float-right"
                                     onClick={copyToClipboard}
                                 >
                                     copy
                                 </button>
                             </div>{" "}
-                            <div className="p-2 bg-[#183D3D] rounded">
+                            <div className="p-2 bg-[#183D3D] rounded-sm">
                                 {decryptedPass}
                             </div>
                         </div>
@@ -333,19 +333,19 @@ const Passwords = (): React.ReactNode => {
                 aria-describedby="modal-modal-description"
                 className="flex items-center justify-center"
             >
-                <div className="bg-[#5C8374] rounded p-5 text-lg">
+                <div className="bg-[#5C8374] rounded-sm p-5 text-lg">
                     <div className="mb-4">
                         Are you sure you want to delete the password?
                     </div>
                     <div className="float-right">
                         <button
-                            className="p-1 rounded bg-[#183D3D] mr-2"
+                            className="p-1 rounded-sm bg-[#183D3D] mr-2"
                             onClick={handleDeletePassword}
                         >
                             Confirm
                         </button>
                         <button
-                            className="p-1 rounded bg-[#183D3D]"
+                            className="p-1 rounded-sm bg-[#183D3D]"
                             onClick={() => {
                                 setDeleteOpen(false);
                             }}

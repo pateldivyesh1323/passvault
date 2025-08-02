@@ -18,7 +18,7 @@ const Introduction = () => {
             </ul>
             {isAuthenticated &&
                 <Link to="/passwords">
-                    <button className="bg-[#93B1A6] p-2 rounded text-black">Go to passwords</button>
+                    <button className="bg-[#93B1A6] p-2 rounded-sm text-black">Go to passwords</button>
                 </Link>
             }
         </div >
