@@ -8,7 +8,7 @@ const isUserOwner = async (uid: string, id: string) => {
 
 const getAllPasswords = async (uid: string) => {
     try {
-        let passwords = await Password.find({ uid });
+        let passwords = await Password.find({ uid }).sort({ createdAt: -1 });
         passwords = passwords.map((pass) => {
             pass.password = decryptData(pass.password);
             return pass;
